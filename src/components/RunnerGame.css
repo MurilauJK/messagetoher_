@@ -1,0 +1,346 @@
+.runner-game {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 490px;
+  padding-top: 2.5rem;
+  background: linear-gradient(180deg, #87ceeb 0%, #b8e4f0 25%, #ffeaa0 55%, #ffd97d 75%, #f3e5f5 95%);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.runner-game-inner {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  min-height: 450px;
+}
+
+.runner-sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.runner-sun {
+  position: absolute;
+  top: 28px;
+  right: 50px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff9e6, #ffeb3b 35%, #ffc107 70%, #ff9800);
+  box-shadow: 0 0 0 4px rgba(255, 235, 59, 0.5), 0 0 40px 12px rgba(255, 193, 7, 0.4), 0 0 80px 24px rgba(255, 152, 0, 0.2);
+  animation: runner-glow 4s ease-in-out infinite;
+}
+
+.runner-moon {
+  position: absolute;
+  top: 28px;
+  right: 50px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f5f5dc, #e8e8e8 40%, #c0c0c0 70%, #a0a0a0);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.2), 0 0 35px 10px rgba(200,220,255,0.25), inset -8px -8px 12px rgba(0,0,0,0.2);
+  animation: runner-glow 5s ease-in-out infinite;
+}
+
+@keyframes runner-glow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.95; }
+}
+
+.runner-instruction {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--rosa-escuro);
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+  z-index: 5;
+  margin: 0;
+  padding: 0 0.5rem;
+}
+
+.runner-score {
+  position: absolute;
+  top: 0.5rem;
+  right: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--roxo-escuro);
+  z-index: 5;
+  margin: 0;
+}
+
+.runner-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 72px;
+  height: 12px;
+  background: linear-gradient(90deg, #c4a77d 0%, #a68b5b 50%, #c4a77d 100%);
+  border-radius: 4px;
+  box-shadow: 0 4px 0 #8b7355, inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.runner-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 340px;
+  overflow: hidden;
+}
+
+.runner-character {
+  position: absolute;
+  left: 50px;
+  bottom: 78px;
+  width: 116px;
+  height: 126px;
+  transition: none;
+  z-index: 10;
+  background: transparent;
+}
+
+.runner-character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  background: transparent;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.runner-character--hit {
+  width: 116px;
+  height: 126px;
+  transform: scale(1.35);
+  transform-origin: center bottom;
+  transition: transform 0.15s ease-out;
+}
+
+.runner-obstacle {
+  position: absolute;
+  bottom: 78px;
+  width: 42px;
+  height: 52px;
+  background: linear-gradient(180deg, #ff85c1 0%, #e91e8c 100%);
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.6), 0 6px 0 #b81a6e, inset 0 2px 0 rgba(255,255,255,0.4);
+  z-index: 8;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 60% 100%, 50% 85%, 40% 100%, 0% 100%);
+}
+
+.runner-obstacle::before {
+  content: '💕';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+}
+
+.runner-chegada {
+  position: absolute;
+  right: 20px;
+  bottom: 78px;
+  width: 110px;
+  height: 120px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.runner-chegada img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+}
+
+.runner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  z-index: 30;
+  animation: runner-fadeIn 0.3s ease;
+}
+
+.runner-won {
+  background: rgba(255, 182, 218, 0.35);
+}
+
+.runner-overlay-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  text-align: center;
+  padding: 0 0.75rem;
+  margin: 0;
+}
+
+.runner-final-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+
+.runner-stat {
+  font-size: 1.1rem;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  margin: 0;
+}
+
+.runner-stat strong {
+  color: #ffeb3b;
+}
+
+.runner-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+@keyframes runner-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.runner-game--phase-2 {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 30%, #0f3460 55%, #533483 80%, #e94560 98%);
+}
+
+.runner-game--phase-2 .runner-instruction {
+  color: #ffb3d9;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.runner-game--phase-2 .runner-score {
+  color: #ffb3d9;
+}
+
+.runner-game--phase-2 .runner-ground {
+  background: linear-gradient(90deg, #2d2d2d 0%, #1a1a1a 50%, #2d2d2d 100%);
+  box-shadow: 0 4px 0 #0d0d0d, inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.runner-game--phase-2 .runner-obstacle {
+  background: linear-gradient(180deg, #b388ff 0%, #7c4dff 100%);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.3), 0 6px 0 #5e35b1, inset 0 2px 0 rgba(255,255,255,0.2);
+}
+
+.runner-game--phase-2 .runner-overlay {
+  background: rgba(30, 20, 50, 0.75);
+}
+
+.runner-game--phase-2 .runner-won {
+  background: rgba(126, 77, 255, 0.35);
+}
+
+/* Personagem fase 2: casal no carro (imagem mais larga) */
+.runner-game--phase-2 .runner-character,
+.runner-game--phase-2 .runner-character--hit {
+  width: 260px;
+  height: 130px;
+  left: 40px;
+}
+
+.runner-game--phase-2 .runner-character--hit {
+  transform: scale(1.3);
+  transform-origin: center bottom;
+  transition: transform 0.15s ease-out;
+}
+
+.runner-game--phase-2 .runner-character img {
+  object-position: center center;
+}
+
+/* Fase 3: tema noite variante (gradiente diferente) */
+.runner-game--phase-3 {
+  background: linear-gradient(180deg, #0d0d1a 0%, #1a1a3e 25%, #2d1b4e 55%, #6b2d5c 85%, #e94560 100%);
+}
+
+.runner-game--phase-3 .runner-instruction {
+  color: #ffb3d9;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.runner-game--phase-3 .runner-score {
+  color: #ffb3d9;
+}
+
+.runner-game--phase-3 .runner-ground {
+  background: linear-gradient(90deg, #2d2d2d 0%, #1a1a1a 50%, #2d2d2d 100%);
+  box-shadow: 0 4px 0 #0d0d0d, inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.runner-game--phase-3 .runner-obstacle {
+  background: linear-gradient(180deg, #e94560 0%, #b388ff 100%);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.25), 0 6px 0 #9e2b4a, inset 0 2px 0 rgba(255,255,255,0.2);
+}
+
+.runner-game--phase-3 .runner-overlay {
+  background: rgba(40, 15, 45, 0.8);
+}
+
+.runner-game--phase-3 .runner-won {
+  background: rgba(233, 69, 96, 0.35);
+}
+
+/* Fase 3: personagem em corrida com efeito de velocidade (chibi) */
+.runner-game--phase-3 .runner-character,
+.runner-game--phase-3 .runner-character--hit {
+  width: 130px;
+  height: 140px;
+  left: 50px;
+}
+
+.runner-game--phase-3 .runner-character--hit {
+  transform: scale(1.3);
+  transform-origin: center bottom;
+  transition: transform 0.15s ease-out;
+}
+
+.runner-game--phase-3 .runner-character img {
+  object-position: center bottom;
+}
+
+@media (max-width: 500px) {
+  .runner-character,
+  .runner-character--hit {
+    left: 30px;
+    width: 94px;
+    height: 102px;
+  }
+
+  .runner-game--phase-2 .runner-character,
+  .runner-game--phase-2 .runner-character--hit {
+    left: 24px;
+    width: 200px;
+    height: 100px;
+  }
+
+  .runner-game--phase-3 .runner-character,
+  .runner-game--phase-3 .runner-character--hit {
+    left: 30px;
+    width: 110px;
+    height: 118px;
+  }
+}

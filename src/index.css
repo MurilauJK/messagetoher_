@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --rosa-claro: #ffb3d9;
+  --rosa: #ff85c1;
+  --rosa-escuro: #e91e8c;
+  --roxo: #b388ff;
+  --roxo-escuro: #7c4dff;
+  --creme: #fff5f8;
+  --sombra: rgba(233, 30, 140, 0.25);
+  --sombra-forte: rgba(124, 77, 255, 0.35);
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #ffeef5 0%, #f3e5f5 50%, #e8eaf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.modal-content--game {
+  max-width: 780px;
+  min-height: 560px;
+  width: 100%;
+}
+
+/* Portal do jogo: fora do modal, garantido visível ao clicar em Sim */
+.game-portal-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  animation: gamePortalFade 0.25s ease;
+}
+
+@keyframes gamePortalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.game-portal-wrapper .runner-game-wrapper {
+  width: 100%;
+  max-width: 780px;
+  min-height: 520px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.runner-game-wrapper {
+  width: 100%;
+  min-height: 520px;
+  position: relative;
+}
+
+.mensagem-celebracao-fase {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.celebracao-casal-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 1.25rem;
+}
+
+.celebracao-casal-img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+}
+
+/* Modal da celebração mais compacto */
+.modal-content--celebracao {
+  max-width: 320px;
+  padding: 1.25rem 1.5rem;
+}
+
+.modal-content--celebracao .mensagem-celebracao-fase {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.modal-content--celebracao .mensagem-celebracao {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal-content--celebracao .celebracao-casal-wrapper {
+  margin: 0.5rem 0 0.75rem;
+}
+
+.modal-content--celebracao .celebracao-casal-img {
+  max-width: 160px;
+}
