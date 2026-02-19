@@ -1,8 +1,4 @@
-"""
-Remove o fundo de uma imagem e salva como PNG com transparência.
-Uso: python remove_bg.py [caminho_da_imagem]
-Requer: pip install rembg pillow
-"""
+
 
 import sys
 import os
