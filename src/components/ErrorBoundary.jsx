@@ -16,7 +16,7 @@ export default class ErrorBoundary extends Component {
       return (
         <div style={{ padding: '2rem', textAlign: 'center', minHeight: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
           <p style={{ color: '#e91e8c', fontWeight: 700 }}>Algo deu errado ao carregar o jogo.</p>
-          <p style={{ fontSize: '0.9rem', color: '#666' }}>Abra o console (F12) para mais detalhes.</p>
+          <p style={{ fontSize: '0.9rem', color: '#666' }}>(F12) para mais detalhes.</p>
           <button
             type="button"
             className="btn btn-sim"
