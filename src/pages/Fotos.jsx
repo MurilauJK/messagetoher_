@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './fotos.css'
 
@@ -17,6 +17,7 @@ const Umbrella = () => <span className="umbrella">☂</span>
 export default function Fotos() {
   const confettiRef = useRef(null)
   const heartsRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     const confettiContainer = confettiRef.current
@@ -62,6 +63,11 @@ export default function Fotos() {
     const id = setInterval(chuva, 400)
     return () => clearInterval(id)
   }, [])
+
+  const total = GALERIA.length
+  const nextFoto = () => setCurrentIndex((prev) => (prev + 1) % total)
+  const prevFoto = () => setCurrentIndex((prev) => (prev - 1 + total) % total)
+  const goToFoto = (index) => setCurrentIndex(index)
 
   return (
     <div className="pagina-fotos">
@@ -114,12 +120,46 @@ export default function Fotos() {
           {[...Array(6)].map((_, i) => <Umbrella key={i} />)}
         </div>
 
-        <section className="galeria-fotos">
-          {GALERIA.map((item, i) => (
-            <div key={i} className="foto-item">
-              <img src={item.src} alt={item.alt} />
+        <section className="galeria-fotos" aria-label="Nossas fotos">
+          <div className="carousel-main">
+            <button
+              type="button"
+              className="carousel-arrow carousel-arrow-left"
+              onClick={prevFoto}
+              aria-label="Foto anterior"
+            >
+              ‹
+            </button>
+            <div className="carousel-photo-wrapper">
+              <img
+                src={GALERIA[currentIndex].src}
+                alt={GALERIA[currentIndex].alt}
+                className="carousel-photo"
+              />
             </div>
-          ))}
+            <button
+              type="button"
+              className="carousel-arrow carousel-arrow-right"
+              onClick={nextFoto}
+              aria-label="Próxima foto"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className="carousel-thumbs" aria-hidden="false">
+            {GALERIA.map((item, i) => (
+              <button
+                key={item.src}
+                type="button"
+                className={`carousel-thumb${i === currentIndex ? ' carousel-thumb--active' : ''}`}
+                onClick={() => goToFoto(i)}
+                aria-label={`Ir para foto ${i + 1}`}
+              >
+                <img src={item.src} alt={item.alt} />
+              </button>
+            ))}
+          </div>
         </section>
       </div>
 

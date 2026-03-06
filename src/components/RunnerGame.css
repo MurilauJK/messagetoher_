@@ -11,6 +11,39 @@
   cursor: pointer;
 }
 
+/* Fase 1: fundo em esteira (duas telas lado a lado, animação contínua sem corte) */
+.runner-game--phase-1 {
+  background: #87ceeb;
+}
+
+.runner-fase1-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.runner-fase1-bg-strip {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: runner-esteira 6s linear infinite;
+}
+
+.runner-fase1-tile {
+  flex: 0 0 50%;
+  height: 100%;
+  background-image: url('/assets/fase1_.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+@keyframes runner-esteira {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 .runner-game-inner {
   position: relative;
   width: 100%;
@@ -128,6 +161,16 @@
   transition: transform 0.15s ease-out;
 }
 
+/* Piscando quando está imune (power-up ativo na fase 2) */
+.runner-character--powered {
+  animation: runner-powered-pisca 0.6s ease-in-out infinite;
+}
+
+@keyframes runner-powered-pisca {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
 .runner-obstacle {
   position: absolute;
   bottom: 78px;
@@ -147,6 +190,66 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.1rem;
+}
+
+/* Fase 1: obstáculos grandes com imagens obs1.png e obs2.png */
+.runner-obstacle--fase1-1,
+.runner-obstacle--fase1-2 {
+  width: 180px;
+  height: 160px;
+  bottom: 78px;
+  background: transparent;
+  box-shadow: none;
+  clip-path: none;
+  border-radius: 0;
+}
+
+/* Obstáculo 2 um pouco menor para não ficar exagerado */
+.runner-obstacle--fase1-2 {
+  width: 140px;
+  height: 130px;
+}
+
+.runner-obstacle--fase1-1::before,
+.runner-obstacle--fase1-2::before {
+  content: none;
+}
+
+.runner-obstacle--fase1-1::after,
+.runner-obstacle--fase1-2::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.runner-obstacle--fase1-1::after {
+  background-image: url('/assets/obs1.png');
+}
+
+.runner-obstacle--fase1-2::after {
+  background-image: url('/assets/obs2.png');
+}
+
+/* Poder especial fase 2: prato (imagem em destaque, sem cobrir a personalidade) */
+.runner-powerup {
+  position: absolute;
+  bottom: 72px;
+  width: 80px;
+  height: 80px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.runner-powerup img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .runner-chegada {
@@ -255,15 +358,18 @@
 }
 
 /* Personagem fase 2: casal no carro (imagem mais larga) */
-.runner-game--phase-2 .runner-character,
-.runner-game--phase-2 .runner-character--hit {
+.runner-game--phase-2 .runner-character {
   width: 260px;
   height: 130px;
   left: 40px;
 }
 
+/* Hit da fase 2: hi2.png um pouco menor que o carro original */
 .runner-game--phase-2 .runner-character--hit {
-  transform: scale(1.3);
+  width: 245px;
+  height: 124px;
+  left: 43px;
+  transform: scale(1);
   transform-origin: center bottom;
   transition: transform 0.15s ease-out;
 }
