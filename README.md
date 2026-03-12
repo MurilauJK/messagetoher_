@@ -1,3 +1,3 @@
 # messagetoher
 
-Site "Quer sair comigo?" – minigame e cartas.
+é isso
